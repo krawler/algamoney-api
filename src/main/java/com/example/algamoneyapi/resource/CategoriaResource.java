@@ -26,6 +26,6 @@ public class CategoriaResource {
 	
 	@PostMapping
 	public void salvar(@RequestBody Categoria categoria) {
-		categoriaRepository.save(categoria)
+		categoriaRepository.save(categoria);
 	}
 }
