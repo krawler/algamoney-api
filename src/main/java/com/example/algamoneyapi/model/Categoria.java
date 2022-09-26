@@ -3,11 +3,14 @@ package com.example.algamoneyapi.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.lang.NonNull;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.ValidationMode;
 
 @Entity
 @Table(name = "categoria")
@@ -22,6 +25,7 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@NonNull
 	private String nome;
 
 	public int getId() {
