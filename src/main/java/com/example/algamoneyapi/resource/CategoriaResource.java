@@ -4,14 +4,13 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -26,6 +25,9 @@ public class CategoriaResource {
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
 	public List<Categoria> listar(){
@@ -46,8 +48,9 @@ public class CategoriaResource {
 	}
 	
 	@GetMapping("/{id}")
-	public Categoria getById(@PathVariable Long id) {
-		return categoriaRepository.getReferenceById(id);
+	public ResponseEntity<Categoria> getById(@PathVariable Long id) {
+		Categoria categoria = categoriaRepository.getReferenceById(id);
+		return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
 		
 	}
 }

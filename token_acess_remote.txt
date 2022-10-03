@@ -1,5 +1,5 @@
 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
 until 24/09
 
-from 24/09
+from 24/09 -- cliente vm ZorinOS
 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
