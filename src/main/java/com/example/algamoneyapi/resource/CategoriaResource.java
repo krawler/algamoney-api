@@ -18,6 +18,7 @@ import com.example.algamoneyapi.model.Categoria;
 import com.example.algamoneyapi.repository.CategoriaRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categorias")
@@ -36,7 +37,7 @@ public class CategoriaResource {
 	
 
 	@PostMapping
-	public ResponseEntity<Categoria> salvar(@RequestBody Categoria categoria, HttpServletResponse response) {
+	public ResponseEntity<Categoria> salvar(@Valid  @RequestBody Categoria categoria, HttpServletResponse response) {
 		
 		Categoria salva = categoriaRepository.save(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()

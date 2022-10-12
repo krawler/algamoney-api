@@ -3,3 +3,7 @@ until 24/09
 
 from 24/09 -- cliente vm ZorinOS
 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
+
+from 24/09 -- PopOS
+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
+
