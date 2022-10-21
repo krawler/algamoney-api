@@ -4,15 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import org.springframework.data.repository.query.QueryByExampleExecutor;
-import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.algamoneyapi.event.RecursoCriadoEvent;
 import com.example.algamoneyapi.model.Pessoa;
 import com.example.algamoneyapi.repository.PessoaRepository;
+import com.example.algamoneyapi.service.PessoaService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -34,6 +33,9 @@ public class PessoaResource {
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
+	
+	@Autowired
+	private PessoaService pessoaService;
 	
 	@GetMapping
 	public List<Pessoa> listar(){
@@ -57,6 +59,12 @@ public class PessoaResource {
 	@ResponseStatus(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS)
 	public void remove(@PathVariable Long id) {
 		 repository.deleteById(id);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Pessoa> update(@PathVariable Long id, @RequestBody Pessoa pessoa){
+	    Pessoa pessoaRetornada = pessoaService.update(id, pessoa);
+	    return ResponseEntity.ok(pessoaRetornada);
 	}
 	
 }
