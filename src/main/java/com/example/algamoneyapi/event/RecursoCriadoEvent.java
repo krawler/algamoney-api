@@ -1,10 +1,8 @@
 package com.example.algamoneyapi.event;
 
-import java.time.Clock;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationEvent;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 public class RecursoCriadoEvent extends ApplicationEvent {
 	

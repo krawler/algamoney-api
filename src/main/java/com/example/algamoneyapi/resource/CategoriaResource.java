@@ -3,6 +3,9 @@ package com.example.algamoneyapi.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.algamoneyapi.model.Categoria;
 import com.example.algamoneyapi.repository.CategoriaRepository;
 
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
@@ -31,8 +31,8 @@ public class CategoriaResource {
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Categoria> listar(){
-		return categoriaRepository.findAll();
+	public ResponseEntity<List<Categoria>> list(){
+		return ResponseEntity.ok(categoriaRepository.findAll());
 	}
 	
 
@@ -50,7 +50,7 @@ public class CategoriaResource {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> getById(@PathVariable Long id) {
-		Categoria categoria = categoriaRepository.getReferenceById(id);
+		Categoria categoria = categoriaRepository.getById(id);
 		return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
 		
 	}

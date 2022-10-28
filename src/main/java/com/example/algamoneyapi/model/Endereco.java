@@ -2,7 +2,7 @@ package com.example.algamoneyapi.model;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 @Embeddable
 public class Endereco implements Serializable {
