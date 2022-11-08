@@ -2,6 +2,8 @@ package com.example.algamoneyapi.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "pessoa")
@@ -27,6 +30,10 @@ public class Pessoa implements Serializable {
 	
 	@Column(name = "ativo", columnDefinition = "boolean default true", nullable = false)
 	private Boolean ativo;
+	
+	@JsonIgnore
+	@Transient
+	private boolean isInativo;
 
 	public Long getId() {
 		return id;
@@ -58,6 +65,14 @@ public class Pessoa implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public boolean isInativo() {
+		return isInativo;
+	}
+
+	public void setInativo(boolean isInativo) {
+		this.isInativo = isInativo;
 	}
 	
 

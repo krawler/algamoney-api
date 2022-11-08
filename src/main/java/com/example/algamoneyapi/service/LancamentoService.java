@@ -9,6 +9,7 @@ import com.example.algamoneyapi.model.Lancamento;
 import com.example.algamoneyapi.model.Pessoa;
 import com.example.algamoneyapi.repository.LancamentoRepository;
 import com.example.algamoneyapi.repository.PessoaRepository;
+import com.example.algamoneyapi.service.exception.PessoaInativaOuInexistenteException;
 
 @Service
 public class LancamentoService {
@@ -21,8 +22,8 @@ public class LancamentoService {
 	
 	public Lancamento save(Lancamento lancamento) {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(lancamento.getPessoa().getId());
-		if(pessoa.isEmpty()) {
-			throw new RuntimeException();
+		if(pessoa.isEmpty() || !pessoa.get().isInativo()) {
+			throw new PessoaInativaOuInexistenteException();
 		}
 		
 		return lancamentoRepository.save(lancamento);
