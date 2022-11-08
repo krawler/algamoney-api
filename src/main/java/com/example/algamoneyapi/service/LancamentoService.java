@@ -2,7 +2,9 @@ package com.example.algamoneyapi.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.algamoneyapi.model.Lancamento;
@@ -26,7 +28,16 @@ public class LancamentoService {
 			throw new PessoaInativaOuInexistenteException();
 		}
 		
-		return lancamentoRepository.save(lancamento);
-		
+		return lancamentoRepository.save(lancamento);		
+	}
+	
+	public Lancamento update(Long id, Lancamento lancamento) {
+	    Lancamento lancamentoRetornado = lancamentoRepository.getById(id);
+	    if(lancamentoRetornado == null) {
+	       throw new EmptyResultDataAccessException(1); 
+	    }
+	    BeanUtils.copyProperties(lancamento, lancamentoRetornado, "id");
+	    lancamentoRepository.save(lancamentoRetornado);
+	    return lancamentoRetornado;
 	}
 }
