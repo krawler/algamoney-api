@@ -46,8 +46,8 @@ public class LancamentoResource {
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
-    public ResponseEntity<List<Lancamento>> search(LancamentoFilter filter){
-		List<Lancamento> lancamentosResult = repository.filter(filter); 
+    public ResponseEntity<List<Lancamento>> search(Lancamento filter){
+		List<Lancamento> lancamentosResult = repository.findAll(); 
         return ResponseEntity.ok().body(lancamentosResult);
     }
 	

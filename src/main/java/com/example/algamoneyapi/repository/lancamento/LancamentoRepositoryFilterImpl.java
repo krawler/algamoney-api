@@ -17,13 +17,13 @@ import org.springframework.util.StringUtils;
 import com.example.algamoneyapi.model.Lancamento;
 import com.example.algamoneyapi.repository.filter.LancamentoFilter;
 
-public class LancamentoRepositoryFilterImpl implements LancamentoRepoditoryQuery {
+public class LancamentoRepositoryFilterImpl implements LancamentoRepositoryQuery {
 	
 	@PersistenceContext
 	private EntityManager manager;
 
 	@Override
-	public List<Lancamento> filter(LancamentoFilter filter) {
+	public List<Lancamento> filter(Lancamento filter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Lancamento> criteria = builder.createQuery(Lancamento.class);
 		Root<Lancamento> root = criteria.from(Lancamento.class);
@@ -35,18 +35,32 @@ public class LancamentoRepositoryFilterImpl implements LancamentoRepoditoryQuery
 		return query.getResultList();
 	}
 
-	private Predicate[] createRestrictions(LancamentoFilter filter, CriteriaBuilder builder, Root<Lancamento> root) {
+	private Predicate[] createRestrictions(Lancamento filter, CriteriaBuilder builder, Root<Lancamento> root) {
 		
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		if(!ObjectUtils.isEmpty(filter.getDescricao())) {
-		   predicates.add(builder.like(builder.lower(root.get("descricao")), "%" + filter.getDescricao().toLowerCase() + "%"));	
+		
+		if(!ObjectUtils.isEmpty(filter.getDescicao())) {
+		   predicates.add(
+				      builder.like(
+				    		      builder.lower(root.get("descricao")), "%" + filter.getDescicao().toLowerCase() + "%"
+				    		  )
+		   );	
 		}
-		if(filter.getDataVencimentoDe() != null) {
-			predicates.add(builder.greaterThanOrEqualTo(root.get("dataVencimento"), filter.getDataVencimentoDe()));
+		if(filter.getDataVencimento() != null) {
+			predicates.add(
+					   builder.greaterThanOrEqualTo(
+							   root.get("dataVencimento"), filter.getDataVencimento()
+					   )
+		     );
 		}
-		if(filter.getDataVencimentoAte() != null) {
-		   predicates.add(builder.lessThanOrEqualTo(root.get("dataVencimento"), filter.getDataVencimentoAte()));	
+		if(filter.getDataVencimento() != null) {
+		   predicates.add(
+				   	  builder.lessThanOrEqualTo(
+				   			  root.get("dataVencimento"), filter.getDataVencimento()
+				   	  )
+		   );	
 		}
+		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
