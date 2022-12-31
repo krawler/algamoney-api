@@ -22,7 +22,7 @@ public class Categoria implements Serializable {
 	
 	@NotNull
 	private String nome;
-
+	
 	public int getId() {
 		return id;
 	}

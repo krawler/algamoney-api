@@ -7,6 +7,6 @@ import com.example.algamoneyapi.model.Lancamento;
 import com.example.algamoneyapi.repository.lancamento.LancamentoRepositoryQuery;
 
 @Repository
-public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
+public interface LancamentoRepository extends JpaRepository<Lancamento, Long>, LancamentoRepositoryQuery {
     
 }
