@@ -12,12 +12,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import com.example.algamoneyapi.model.Lancamento;
 import com.example.algamoneyapi.repository.filter.LancamentoFilter;
 
-public class LancamentoRepositoryFilterImpl implements LancamentoRepoditoryQuery {
+public class LancamentoRepositoryFilterImpl implements LancamentoRepositoryQuery {
 	
 	@PersistenceContext
 	private EntityManager manager;

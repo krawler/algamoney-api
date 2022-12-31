@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import com.example.algamoneyapi.model.Lancamento;
 import com.example.algamoneyapi.repository.filter.LancamentoFilter;
 
-public interface LancamentoRepoditoryQuery {
+public interface LancamentoRepositoryQuery {
 	
 	public List<Lancamento> filter(LancamentoFilter filter);
 
