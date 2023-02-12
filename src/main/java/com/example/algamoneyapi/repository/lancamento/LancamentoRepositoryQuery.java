@@ -8,6 +8,6 @@ import com.example.algamoneyapi.repository.filter.LancamentoFilter;
 
 public interface LancamentoRepositoryQuery {
 	
-	public Page<Lancamento> filter(LancamentoFilter filter, Pageable pageable);
+	public Page<Lancamento> filter(LancamentoFilter lancamentoFilter, Pageable pageable);
 
 }
